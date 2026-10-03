@@ -1,0 +1,25 @@
+<!--pages/checkin/checkin.wxml-->
+<view class="page">
+  <view class="header">
+    <view class="title">活动签到</view>
+    <view class="subtitle">扫码或手动完成签到</view>
+  </view>
+
+  <view class="actions">
+    <button class="btn-primary scan-btn" bindtap="onScan">📷 扫码签到</button>
+    <button class="btn-outline manual-btn" bindtap="onManual">手动输入手机号</button>
+  </view>
+
+  <view class="result card" wx:if="{{result}}">
+    <view class="result-icon">{{result.success ? '✅' : '❌'}}</view>
+    <view class="result-msg">{{result.message}}</view>
+    <view class="result-code" wx:if="{{result.code}}">原始内容：{{result.code}}</view>
+  </view>
+
+  <view class="tips">
+    <view>提示：</view>
+    <view>1. 扫码签到需使用活动专属二维码</view>
+    <view>2. 手动签到请输入报名时的手机号</view>
+    <view>3. 本页主要用于管理员现场核销</view>
+  </view>
+</view>
