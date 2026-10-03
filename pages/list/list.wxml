@@ -1,0 +1,49 @@
+<!--pages/list/list.wxml-->
+<view class="page">
+  <!-- Tabs -->
+  <view class="tabs">
+    <view
+      wx:for="{{tabs}}"
+      wx:key="key"
+      class="tab-item {{currentTab === item.key ? 'active' : ''}}"
+      data-key="{{item.key}}"
+      bindtap="onTabChange"
+    >{{item.name}}</view>
+  </view>
+
+  <!-- 列表 -->
+  <view class="list-container">
+    <view
+      class="list-item card"
+      wx:for="{{filteredEvents}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="goDetail"
+    >
+      <image src="{{item.cover}}" mode="aspectFill" class="list-cover" />
+      <view class="list-info">
+        <view class="list-header">
+          <text class="list-title">{{item.title}}</text>
+          <text class="status-tag status-{{item.status}}">
+            {{item.status === 'ongoing' ? '进行中' : item.status === 'upcoming' ? '即将开始' : '已结束'}}
+          </text>
+        </view>
+        <view class="list-meta">📅 {{item.date}} {{item.time}}</view>
+        <view class="list-meta">📍 {{item.location}}</view>
+        <view class="list-footer">
+          <view class="people">
+            <text class="people-num">{{item.currentPeople}}</text>/{{item.maxPeople}}人已报名
+          </view>
+          <view class="price {{item.price === 0 ? 'free' : ''}}">
+            {{item.price === 0 ? '免费' : '¥' + item.price}}
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty" wx:if="{{filteredEvents.length === 0}}">
+      <view class="empty-icon">📭</view>
+      <view>暂无相关活动</view>
+    </view>
+  </view>
+</view>
