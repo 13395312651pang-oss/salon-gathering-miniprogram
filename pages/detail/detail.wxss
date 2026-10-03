@@ -1,0 +1,166 @@
+/* pages/detail/detail.wxss */
+.page {
+  padding-bottom: 140rpx;
+}
+
+.cover {
+  width: 100%;
+  height: 400rpx;
+}
+
+.info-card {
+  margin: -40rpx 24rpx 24rpx;
+  padding: 32rpx;
+  position: relative;
+  z-index: 2;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 16rpx;
+}
+
+.tags {
+  margin-bottom: 24rpx;
+}
+
+.status-tag {
+  display: inline-block;
+  padding: 6rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  margin-left: 8rpx;
+}
+
+.info-row {
+  display: flex;
+  padding: 12rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.label {
+  width: 140rpx;
+  color: #999;
+  font-size: 26rpx;
+  flex-shrink: 0;
+}
+
+.value {
+  flex: 1;
+  font-size: 26rpx;
+  color: #333;
+}
+
+.price {
+  color: #e17055;
+  font-weight: 600;
+}
+
+.price.free {
+  color: #00b894;
+}
+
+.people-num {
+  color: #6c5ce7;
+  font-weight: 500;
+}
+
+.section {
+  margin: 0 24rpx 24rpx;
+  padding: 32rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-bottom: 20rpx;
+  color: #1a1a2e;
+}
+
+.desc {
+  font-size: 28rpx;
+  color: #555;
+  line-height: 1.7;
+}
+
+.agenda-list {
+  position: relative;
+  padding-left: 20rpx;
+}
+
+.agenda-item {
+  display: flex;
+  padding: 16rpx 0;
+  position: relative;
+}
+
+.agenda-item::before {
+  content: '';
+  position: absolute;
+  left: -20rpx;
+  top: 28rpx;
+  width: 12rpx;
+  height: 12rpx;
+  background: #6c5ce7;
+  border-radius: 50%;
+}
+
+.agenda-time {
+  width: 180rpx;
+  font-size: 24rpx;
+  color: #6c5ce7;
+  flex-shrink: 0;
+}
+
+.agenda-content {
+  flex: 1;
+  font-size: 26rpx;
+  color: #333;
+}
+
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  padding: 20rpx 32rpx;
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.06);
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+}
+
+.share-btn {
+  width: 160rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: #f5f5f7;
+  color: #666;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  padding: 0;
+}
+
+.share-btn::after {
+  border: none;
+}
+
+.register-btn {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin: 0;
+}
+
+.register-btn[disabled] {
+  background: #ccc !important;
+  color: #fff !important;
+}
