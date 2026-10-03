@@ -1,0 +1,54 @@
+<!--pages/my/my.wxml-->
+<view class="page">
+  <!-- 用户信息 -->
+  <view class="user-card">
+    <view class="user-info" wx:if="{{hasUserInfo}}">
+      <image src="{{userInfo.avatarUrl}}" class="avatar" />
+      <view class="user-text">
+        <view class="nickname">{{userInfo.nickName}}</view>
+        <view class="desc">已报名 {{registeredCount}} 场活动</view>
+      </view>
+    </view>
+    <view class="user-info" wx:else bindtap="onGetUserInfo">
+      <view class="avatar placeholder">👤</view>
+      <view class="user-text">
+        <view class="nickname">点击登录</view>
+        <view class="desc">登录后查看我的活动</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能入口 -->
+  <view class="menu-card card">
+    <view class="menu-item" bindtap="goCreate">
+      <text class="menu-icon">✏️</text>
+      <text class="menu-text">发布活动</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="clearData">
+      <text class="menu-icon">🗑️</text>
+      <text class="menu-text">清除本地数据</text>
+      <text class="menu-arrow">></text>
+    </view>
+  </view>
+
+  <!-- 我的报名 -->
+  <view class="section">
+    <view class="section-title">我的报名</view>
+    <view wx:if="{{myRegistrations.length === 0}}" class="empty">
+      <view class="empty-icon">📋</view>
+      <view>暂无报名记录</view>
+    </view>
+    <view
+      class="reg-item card"
+      wx:for="{{myRegistrations}}"
+      wx:key="eventId"
+      data-id="{{item.eventId}}"
+      bindtap="goDetail"
+    >
+      <view class="reg-title">{{item.eventTitle}}</view>
+      <view class="reg-meta">姓名：{{item.name}} · {{item.phone}}</view>
+      <view class="reg-time">报名时间：{{item.registerTime}}</view>
+    </view>
+  </view>
+</view>
