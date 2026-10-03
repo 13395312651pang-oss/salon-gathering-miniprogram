@@ -1,0 +1,93 @@
+<!--pages/index/index.wxml-->
+<view class="page">
+  <!-- 搜索栏 -->
+  <view class="search-bar" bindtap="onSearch">
+    <view class="search-inner">
+      <text class="search-icon">🔍</text>
+      <text class="search-placeholder">搜索沙龙主题、地点...</text>
+    </view>
+  </view>
+
+  <!-- Banner -->
+  <swiper class="banner" indicator-dots autoplay circular interval="4000">
+    <swiper-item wx:for="{{banners}}" wx:key="id">
+      <image src="{{item.image}}" mode="aspectFill" class="banner-img" />
+      <view class="banner-title">{{item.title}}</view>
+    </swiper-item>
+  </swiper>
+
+  <!-- 分类 -->
+  <scroll-view scroll-x class="category-scroll">
+    <view class="category-list">
+      <view
+        wx:for="{{categories}}"
+        wx:key="id"
+        class="category-item {{currentCategory === item.id ? 'active' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="onCategoryTap"
+      >{{item.name}}</view>
+    </view>
+  </scroll-view>
+
+  <!-- 热门沙龙 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">热门沙龙</text>
+      <text class="section-more" bindtap="goList">查看全部 ></text>
+    </view>
+    <view class="event-grid">
+      <view
+        class="event-card"
+        wx:for="{{hotEvents}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="goDetail"
+      >
+        <image src="{{item.cover}}" mode="aspectFill" class="event-cover" />
+        <view class="event-body">
+          <view class="event-title">{{item.title}}</view>
+          <view class="event-meta">
+            <text>📅 {{item.date}} {{item.time}}</text>
+          </view>
+          <view class="event-meta">
+            <text>📍 {{item.location}}</text>
+          </view>
+          <view class="event-footer">
+            <view class="people">
+              <text class="people-num">{{item.currentPeople}}</text>/{{item.maxPeople}}人
+            </view>
+            <view class="price {{item.price === 0 ? 'free' : ''}}">
+              {{item.price === 0 ? '免费' : '¥' + item.price}}
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 即将开始 -->
+  <view class="section" wx:if="{{upcomingEvents.length}}">
+    <view class="section-header">
+      <text class="section-title">即将开始</text>
+    </view>
+    <view class="upcoming-list">
+      <view
+        class="upcoming-item card"
+        wx:for="{{upcomingEvents}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="goDetail"
+      >
+        <image src="{{item.cover}}" mode="aspectFill" class="upcoming-cover" />
+        <view class="upcoming-info">
+          <view class="event-title">{{item.title}}</view>
+          <view class="event-meta">📅 {{item.date}} {{item.time}}</view>
+          <view class="event-meta">📍 {{item.location}}</view>
+          <view class="tags">
+            <text class="tag" wx:for="{{item.tags}}" wx:key="*this" wx:for-item="tag">{{tag}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
