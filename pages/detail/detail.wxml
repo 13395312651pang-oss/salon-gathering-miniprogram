@@ -1,0 +1,73 @@
+<!--pages/detail/detail.wxml-->
+<view class="page" wx:if="{{event}}">
+  <!-- 封面 -->
+  <image src="{{event.cover}}" mode="aspectFill" class="cover" />
+
+  <!-- 基本信息 -->
+  <view class="info-card card">
+    <view class="title">{{event.title}}</view>
+    <view class="tags">
+      <text class="tag" wx:for="{{event.tags}}" wx:key="*this">{{item}}</text>
+      <text class="status-tag status-{{event.status}}">
+        {{event.status === 'ongoing' ? '进行中' : event.status === 'upcoming' ? '即将开始' : '已结束'}}
+      </text>
+    </view>
+    <view class="info-row">
+      <text class="label">📅 时间</text>
+      <text class="value">{{event.date}} {{event.time}}</text>
+    </view>
+    <view class="info-row">
+      <text class="label">📍 地点</text>
+      <text class="value">{{event.location}}</text>
+    </view>
+    <view class="info-row">
+      <text class="label">🏠 地址</text>
+      <text class="value">{{event.address}}</text>
+    </view>
+    <view class="info-row">
+      <text class="label">👤 主办</text>
+      <text class="value">{{event.host}}</text>
+    </view>
+    <view class="info-row">
+      <text class="label">💰 费用</text>
+      <text class="value price {{event.price === 0 ? 'free' : ''}}">
+        {{event.price === 0 ? '免费' : '¥' + event.price}}
+      </text>
+    </view>
+    <view class="info-row">
+      <text class="label">👥 名额</text>
+      <text class="value">
+        <text class="people-num">{{event.currentPeople}}</text>/{{event.maxPeople}}人
+      </text>
+    </view>
+  </view>
+
+  <!-- 活动介绍 -->
+  <view class="section card">
+    <view class="section-title">活动介绍</view>
+    <view class="desc">{{event.description}}</view>
+  </view>
+
+  <!-- 活动流程 -->
+  <view class="section card" wx:if="{{event.agenda && event.agenda.length}}">
+    <view class="section-title">活动流程</view>
+    <view class="agenda-list">
+      <view class="agenda-item" wx:for="{{event.agenda}}" wx:key="time">
+        <view class="agenda-time">{{item.time}}</view>
+        <view class="agenda-content">{{item.content}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部报名栏 -->
+  <view class="bottom-bar">
+    <button class="share-btn" open-type="share">分享</button>
+    <button
+      class="btn-primary register-btn"
+      bindtap="onRegister"
+      disabled="{{isRegistered || event.status === 'ended' || event.currentPeople >= event.maxPeople}}"
+    >
+      {{isRegistered ? '已报名' : event.status === 'ended' ? '已结束' : event.currentPeople >= event.maxPeople ? '名额已满' : '立即报名'}}
+    </button>
+  </view>
+</view>
